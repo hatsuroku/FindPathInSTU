@@ -323,13 +323,23 @@ Name[19] = "汕头大学附属中学";
             drawLine();
             PathLine[PathLine.length - 1].search(placeID[final_path[0]],placeID[final_path[1]]);
             PathString += "<span class='cyan-text'>1. " + Name[final_path[0]] + "</span><br/>";
+            if(final_path.length === 2) {
+                PathString += "&nbsp&nbsp&nbsp&nbsp&nbsp" +
+                                " ↓ <span class = 'green-text'>" + g[final_path[0]][final_path[1]] +  " 米</span></br>";
+            }
             for (var i = 1; i < final_path.length - 1; i++) {
                 drawLine();
                 PathLine[PathLine.length - 1].search(placeID[final_path[i]],placeID[final_path[i+1]]);
-                PathString += i + 1 + ". " + Name[final_path[i]] + "<br/>";
+                PathString += "&nbsp&nbsp&nbsp&nbsp&nbsp" +
+                                " ↓ <span class = 'green-text'>" + g[final_path[i - 1]][final_path[i]] +  " 米 </span></br>";
+                PathString += i + 1 + ". " + Name[final_path[i]] +  "<br/>";
+            }
+            if(final_path.length !== 2) {
+                PathString += "&nbsp&nbsp&nbsp&nbsp&nbsp" +
+                                " ↓ <span class = 'green-text'>" + g[final_path[final_path.length - 2]][final_path[final_path.length - 1]] + " 米</span></br>";
             }
             PathString += "<span class='teal-text'>" +
-                            final_path.length + ". " + Name[final_path[final_path.length - 1]] + "</span>";
+                            final_path.length + ". " + Name[final_path[final_path.length - 1]]  +  "</span>";
             // alert(PathString);
 
             showTextArea.innerHTML = "<div class='section'><p>" + PathString + "</p></div>";
